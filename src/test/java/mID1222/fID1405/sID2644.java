@@ -1,4 +1,4 @@
-
+ 	
 package mID1222.fID1405;
 import pom.VitalDXObjects;
 import pom.VitalDXObjectsNew;
@@ -448,6 +448,63 @@ public class sID2644 extends  AllActions {
           } 
           };
 
-             
+          @Test(priority=11)
+        @Parameters({"iterations"})
+          public void step_11(@Optional("1") int iterations) throws Exception
+          {
+          try
+          {
+              String varMethodName=Thread.currentThread().getStackTrace()[1].getMethodName();
+              V1=actions.getData("./Excel/VitalDXData.xlsx","Sheet1",2,2);
+
+              try{
+              driver.get().switchTo().alert();
+          }
+          catch(NoAlertPresentException e){
+              String methodName=Thread.currentThread().getStackTrace()[1].getMethodName();
+      actions.CaptureScreenShotAtEachStep(path,methodName,screenshotOption);
+      Reporter.log(browserName);
+      Reporter.log(browserVersion);
+      Reporter.log(actions.CaptureScreenShotAtEachStep(path,methodName,screenshotOption));
+          }
+              
+          String status="PASS";
+          javamethod.MongoDBUpdate(status,reportRuncount,fileName,pid);  
+          actions.AssertAll();
+          driver.get().quit();
+              }
+          catch(Exception e)
+          {
+          String methodName=Thread.currentThread().getStackTrace()[1].getMethodName();     
+          actions.CaptureOnFailure(path1,methodName,failScreenshotoption);
+          Reporter.log(browserName);
+          Reporter.log(browserVersion);
+          Reporter.log(actions.CaptureOnFailure(path1,methodName,failScreenshotoption));
+          e.printStackTrace();
+          actions.captureDOM(path,fileName);
+          String status="FAIL";
+          javamethod.MongoDBUpdate(status,reportRuncount,fileName,pid);
+          actions.CloseCurrentTab();
+          driver.get().quit();
+          throw e;
+          } 
+
+          catch(Throwable e)
+          {
+          String methodName=Thread.currentThread().getStackTrace()[1].getMethodName();     
+          actions.CaptureOnFailure(path1,methodName,failScreenshotoption);
+          Reporter.log(browserName);
+          Reporter.log(browserVersion);
+          Reporter.log(actions.CaptureOnFailure(path1,methodName,failScreenshotoption));
+          e.printStackTrace();
+          actions.captureDOM(path,fileName);
+          String status="FAIL";
+          javamethod.MongoDBUpdate(status,reportRuncount,fileName,pid);
+          actions.CloseCurrentTab();
+          driver.get().quit();
+          throw e;
+          } 
+          };
+    
              
 }
